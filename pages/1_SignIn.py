@@ -23,8 +23,9 @@ with st.form("SignIn Form"):
             if password != re_enter_password:
                 st.error("Passwords are not macthing. Please check!", icon = "🚨")
                 st.stop()
-            payload = create_post_payload(username, password)
-            signin_response = ibs_signin(payload)
+            with st.spinner("Processing......."):
+                payload = create_post_payload(username, password)
+                signin_response = ibs_signin(payload)
             if signin_response["status"] == "failure":
                 st.error(signin_response["errors"][0], icon = "🚨")
             else:

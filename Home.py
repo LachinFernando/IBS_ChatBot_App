@@ -22,8 +22,9 @@ with st.form("LogIn Form"):
     submitted = st.form_submit_button("LogIn")
     if submitted:
         if username and password:
-            payload = create_get_payload(username, password)
-            login_response = login(payload)
+            with st.spinner("Processing......."):
+                payload = create_get_payload(username, password)
+                login_response = login(payload)
             if login_response["status"] == "failure":
                 st.error(login_response["errors"][0], icon = "🚨")
             else:
